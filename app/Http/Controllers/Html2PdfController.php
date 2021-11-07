@@ -51,7 +51,7 @@ class Html2PdfController extends Controller
             return $snappy->getOutput($request->input('url'), $options);
         }
 
-        return $snappy->generateFromHtml($request->input('html'), $options);
+        return $snappy->getOutputFromHtml($request->input('html'), $options);
     }
 
     /**
