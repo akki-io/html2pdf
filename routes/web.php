@@ -13,5 +13,7 @@
 |
 */
 
+$router->get('/', 'Html2PdfController@index');
 $router->post('/', 'Html2PdfController@index');
+
 $router->get('/status', 'StatusController@index');

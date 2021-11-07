@@ -20,20 +20,41 @@ class Html2PdfController extends Controller
         $this->validate($request, [
             'html' => 'required',
             'options' => 'nullable|array',
+            'preview' => 'nullable|boolean',
+            'filename' => 'nullable|string',
         ]);
 
         $html = $request->input('html');
-        $options = $request->input('options');
+        $options = $request->input('options') ?? [];
 
         $snappy = App::make('snappy.pdf');
 
         return new Response(
             $snappy->getOutputFromHtml($html, $options),
             200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="file.pdf"',
-            ]
+            $this->getHeaders(
+                $request->input('preview') ?? false,
+                $request->input('filename') ?? 'file.pdf',
+            )
         );
+    }
+
+    /**
+     * Get the headers.
+     *
+     * @param false $preview
+     * @return string[]
+     */
+    private function getHeaders(bool $preview, string $filename): array
+    {
+        $headers = [
+            'Content-Type' => 'application/pdf',
+        ];
+
+        if (! $preview) {
+            $headers['Content-Disposition'] = "attachment; filename=\"{$filename}\"";
+        }
+
+        return $headers;
     }
 }

@@ -1,5 +1,7 @@
-FROM akkica/laravel-web-wkhtmltopdf:7.4
+FROM akkica/laravel-web-wkhtmltopdf:8.0
 
+COPY ./.env.example /var/www/html/.env
 COPY . /var/www/html
+RUN composer install
 
 CMD [ "/bin/sh", "-c", "/tmp/start.sh" ]
