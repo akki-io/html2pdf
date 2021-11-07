@@ -8,6 +8,8 @@ html2pdf is a small microservice build using the [lumen](https://lumen.laravel.c
 
 The microservice comes as a docker image, and it can be hosted on services that support docker images. The demo is serverless and run on Google Cloud Run.
 
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/akki-io/html2pdf)
+
 ## Demo
 1. Preview PDF from HTML - [Click Here](https://html2pdf.akki.ca/?preview=1&html=%3Clink%20href=%22https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css%22%20rel=%22stylesheet%22%3E%3Ccenter%3E%3Cimg%20src=%22https://cdn.akki.ca/html2pdf-black.png%22%3E%3Ch1%20class=%22mt-5%22%3EThis%20PDF%20Generated%20using%20html2pdf%3C/h1%3E%3Cp%20class=%22lead%20mt-5%22%3ETo%20learn%20more%20%3Ca%20target=%22_blank%22%20href=%22https://github.com/akki-io/html2pdf%22%3Eclick%20here%3C/a%3E%3C/p%3E%3C/center%3E)
 2. Preview PDF from URL - [Click Here](https://html2pdf.akki.ca/?preview=1&url=https://en.wikipedia.org/wiki/Main_Page)
