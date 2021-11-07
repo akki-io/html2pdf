@@ -18,25 +18,40 @@ class Html2PdfController extends Controller
     public function index(Request $request): Response
     {
         $this->validate($request, [
-            'html' => 'required',
+            'html' => 'required_without:url',
+            'url' => 'nullable|active_url',
             'options' => 'nullable|array',
             'preview' => 'nullable|boolean',
             'filename' => 'nullable|string',
         ]);
 
-        $html = $request->input('html');
-        $options = $request->input('options') ?? [];
-
-        $snappy = App::make('snappy.pdf');
-
         return new Response(
-            $snappy->getOutputFromHtml($html, $options),
+            $this->getOutput($request),
             200,
             $this->getHeaders(
                 $request->input('preview') ?? false,
                 $request->input('filename') ?? 'file.pdf',
             )
         );
+    }
+
+    /**
+     * Get the output based on html or url.
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    private function getOutput(Request $request)
+    {
+        $snappy = App::make('snappy.pdf');
+
+        $options = $request->input('options') ?? [];
+
+        if ($request->has('url')) {
+            return $snappy->getOutput($request->input('url'), $options);
+        }
+
+        return $snappy->generateFromHtml($request->input('html'), $options);
     }
 
     /**
