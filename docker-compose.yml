@@ -3,7 +3,7 @@ version: '3'
 services:
 
   web:
-    image: akkica/laravel-web-wkhtmltopdf:8.0
+    image: akkica/laravel-web-wkhtmltopdf:stable
     volumes:
       - .:/var/www/html
     ports:
